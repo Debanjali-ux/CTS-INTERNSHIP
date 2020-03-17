@@ -1,0 +1,47 @@
+body {
+    background-color: lightgray;
+    
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    
+}
+
+.header {
+    float: left;
+    width: 80%;
+    background-color:  white;
+    border: 1px solid gray;
+    margin:auto;
+    border-radius:8px;
+}
+
+.logo
+{
+    float:left;
+    
+}
+.header-text
+{
+    float:left;
+}
+.clear
+{
+    clear: both;
+}
+.solutions
+{
+    background-color: #cc0000;
+    border-right: 1px solid lightgray;
+    height: 40px;
+    padding: 12px 0px 0px 10px;
+    font-size: 1.2em;
+    color: white;
+}
+.pd-left
+{
+    padding-left: 20px;
+}

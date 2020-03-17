@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+
+<head>
+    <title>Registration Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <center>
+            <h2>Registration Form</h2>
+        </center>
+        <hr>
+        <form action="/action_page.php">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label for="fname">First Name:</label>
+                        <input type="fname" class="form-control" id="fname" placeholder="Enter your first name here"
+                            name="fname">
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label for="lname">Last Name:</label>
+                        <input type="lname" class="form-control" id="lname" placeholder="Enter your last name here"
+                            name="lname">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="phone" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+            </div>
+
+            <div class="third">
+
+                <h1>Subject of Interests:</h1>
+                <div class="book">
+
+                    <input type="checkbox" id="type1" name="type1" value="Adventures">
+                    <label for="type1"> Adventures </label><br>
+                    <input type="checkbox" id="type2" name="type2" value="Movies">
+                    <label for="type2"> Movies</label><br>
+                    <input type="checkbox" id="type3" name="type3" value="Sports">
+                    <label for="type3"> Sports</label><br><br>
+
+
+                </div>
+                <div class="book">
+
+                    <input type="checkbox" id="type1" name="type1" value="Adventures">
+                    <label for="type1"> Adventures </label><br>
+                    <input type="checkbox" id="type2" name="type2" value="Movies">
+                    <label for="type2"> Movies</label><br>
+                    <input type="checkbox" id="type3" name="type3" value="Sports">
+                    <label for="type3"> Sports</label><br><br>
+
+                </div>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" name="remember"> Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+    </div>
+    <style>
+        .container {
+            border: 1px solid black;
+            width: 60%;
+            height: 680px;
+            margin: auto;
+            margin-bottom: 70%;
+            shape-margin: 70%;
+            background-color: #0522;
+        }
+
+        .book {
+            float: left;
+            width: 48%;
+        }
+    </style>
+</body>
+
+</html>
