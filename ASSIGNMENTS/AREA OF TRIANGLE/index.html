@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        Enter 1st side:<input type="text" id="txt1" name="num1"><br><br>
+        Enter 2nd side:<input type="text" id="txt2" name="num2"><br><br>
+        Enter 3rd side:<input type="text" id="txt3" name="num3"><br><br>
+       
+        <button onclick="narea()">Find Area</button>
+        <input id="answer"><br><br>
+        <script>
+            function narea() {
+            var a, b, c;
+            a = parseInt(document.getElementById("txt1").value);
+            b = parseInt(document.getElementById("txt2").value);
+            c= parseInt(document.getElementById("txt3").value);
+            var s = (a + b + c) / 2;
+            var area = Math.sqrt(s*(s - a) * (s - b) * (s - c));
+            document.getElementById("answer").value=area;
+            }
+        </script>
+    </body>
+</html>
