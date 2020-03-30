@@ -1,0 +1,11 @@
+.zoom{
+    cursor:pointer;
+}
+.zoom:hover {
+    transform: scale(0.96);
+    cursor: pointer;
+}
+body
+{
+    background-image: url(./images/back.jfif);
+}
