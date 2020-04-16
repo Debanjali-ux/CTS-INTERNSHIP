@@ -1,0 +1,268 @@
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-J72AP8J c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.11-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database irctc;
+Query OK, 1 row affected (0.059 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| classicmodels      |
+| information_schema |
+| irctc              |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sakila             |
+| test               |
++--------------------+
+8 rows in set (0.161 sec)
+
+MariaDB [(none)]> use irctc;
+Database changed
+
+MariaDB [irctc]> create table train(
+    -> tno int primary key,
+    -> tname varchar(30),
+    -> tsource varchar(30),
+    -> tdest varchar(30));
+Query OK, 0 rows affected (0.363 sec)
+
+MariaDB [irctc]> select * from train;
+Empty set (0.188 sec)
+
+MariaDB [irctc]> desc train;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| tno     | int(11)     | NO   | PRI | NULL    |       |
+| tname   | varchar(30) | YES  |     | NULL    |       |
+| tsource | varchar(30) | YES  |     | NULL    |       |
+| tdest   | varchar(30) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.106 sec)
+
+MariaDB [(none)]> use irctc;
+Database changed
+MariaDB [irctc]> create table schedule(
+    -> scode varchar(10),
+    -> arrt varchar(6),
+    -> tdept varchar(6),
+    -> sname varchar(30),
+    -> tno int,
+    -> foreign key(tno) references train(tno));
+Query OK, 0 rows affected (0.346 sec)
+
+MariaDB [irctc]> desc schedule;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| scode | varchar(10) | YES  |     | NULL    |       |
+| arrt  | varchar(6)  | YES  |     | NULL    |       |
+| tdept | varchar(6)  | YES  |     | NULL    |       |
+| sname | varchar(30) | YES  |     | NULL    |       |
+| tno   | int(11)     | YES  | MUL | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.033 sec)
+
+MariaDB [irctc]> insert into train values (325, 'Rajdhani Express' , 'Sealdah' , 'Delhi');
+Query OK, 1 row affected (0.106 sec)
+
+MariaDB [irctc]> insert into train values (326, 'Lucknow Express' , 'Sealdah' , 'Lucknow');
+Query OK, 1 row affected (0.201 sec)
+
+MariaDB [irctc]> insert into train values (327, 'Ganga Kaveri Express' , 'Chennai Central' , 'Chhapra Junction');
+Query OK, 1 row affected (0.036 sec)
+
+MariaDB [irctc]> insert into train values (328, 'Ganga Sagar Express' , 'Jaynagar' , 'Sealdah');
+Query OK, 1 row affected (0.041 sec)
+
+MariaDB [irctc]> insert into train values (329, 'Ganga Sutlej Express' , 'Dhanbad' , 'Firozpur Cantt');
+Query OK, 1 row affected (0.059 sec)
+
+MariaDB [irctc]> select * from train;
++-----+----------------------+-----------------+------------------+
+| tno | tname                | tsource         | tdest            |
++-----+----------------------+-----------------+------------------+
+| 325 | Rajdhani Express     | Sealdah         | Delhi            |
+| 326 | Lucknow Express      | Sealdah         | Lucknow          |
+| 327 | Ganga Kaveri Express | Chennai Central | Chhapra Junction |
+| 328 | Ganga Sagar Express  | Jaynagar        | Sealdah          |
+| 329 | Ganga Sutlej Express | Dhanbad         | Firozpur Cantt   |
++-----+----------------------+-----------------+------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [irctc]> insert into schedule values ('sdh', '07:10' ,'07:25', 'Sealdah' , 325);
+Query OK, 1 row affected (0.046 sec)
+
+MariaDB [irctc]> insert into schedule values ('sdh', '07:10' ,'07:25', 'Howrah' , 325);
+Query OK, 1 row affected (0.068 sec)
+
+MariaDB [irctc]> delete from schedule where sname='Howrah';
+Query OK, 1 row affected (0.099 sec)
+
+MariaDB [irctc]> select * from schedule;
++-------+-------+-------+---------+------+
+| scode | arrt  | tdept | sname   | tno  |
++-------+-------+-------+---------+------+
+| sdh   | 07:10 | 07:25 | Sealdah |  325 |
++-------+-------+-------+---------+------+
+1 row in set (0.001 sec)
+
+MariaDB [irctc]> insert into schedule values ('hwo', '07:45' ,'08:15', 'Howrah' , 325);
+Query OK, 1 row affected (0.045 sec)
+
+MariaDB [irctc]> insert into schedule values ('kgp', '08:45' ,'09:00', 'Kharagpur' , 325);
+Query OK, 1 row affected (0.086 sec)
+
+MariaDB [irctc]> insert into schedule values ('pra', '09:05' ,'09:10', 'Prantik' , 325);
+Query OK, 1 row affected (0.049 sec)
+
+MariaDB [irctc]> insert into schedule values ('del', '09:15' ,'09:45', 'Delhi' , 325);
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [irctc]> select * from schedule;
++-------+-------+-------+-----------+------+
+| scode | arrt  | tdept | sname     | tno  |
++-------+-------+-------+-----------+------+
+| sdh   | 07:10 | 07:25 | Sealdah   |  325 |
+| hwo   | 07:45 | 08:15 | Howrah    |  325 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  325 |
+| pra   | 09:05 | 09:10 | Prantik   |  325 |
+| del   | 09:15 | 09:45 | Delhi     |  325 |
++-------+-------+-------+-----------+------+
+5 rows in set (0.001 sec)
+
+MariaDB [irctc]> insert into schedule values ('sdh', '07:10' ,'07:25', 'Sealdah' , 326);
+Query OK, 1 row affected (0.072 sec)
+
+MariaDB [irctc]> insert into schedule values ('hwo', '07:45' ,'08:15', 'Howrah' , 326);
+Query OK, 1 row affected (0.041 sec)
+
+MariaDB [irctc]> insert into schedule values ('kgp', '08:45' ,'09:00', 'Kharagpur' , 326);
+Query OK, 1 row affected (0.055 sec)
+
+MariaDB [irctc]> insert into schedule values ('pra', '09:05' ,'09:10', 'Prantik' , 326);
+Query OK, 1 row affected (0.034 sec)
+
+MariaDB [irctc]> insert into schedule values ('del', '09:15' ,'09:45', 'Delhi' , 326);
+Query OK, 1 row affected (0.045 sec)
+
+MariaDB [irctc]> select * from schedule;
++-------+-------+-------+-----------+------+
+| scode | arrt  | tdept | sname     | tno  |
++-------+-------+-------+-----------+------+
+| sdh   | 07:10 | 07:25 | Sealdah   |  325 |
+| hwo   | 07:45 | 08:15 | Howrah    |  325 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  325 |
+| pra   | 09:05 | 09:10 | Prantik   |  325 |
+| del   | 09:15 | 09:45 | Delhi     |  325 |
+| sdh   | 07:10 | 07:25 | Sealdah   |  326 |
+| hwo   | 07:45 | 08:15 | Howrah    |  326 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  326 |
+| pra   | 09:05 | 09:10 | Prantik   |  326 |
+| del   | 09:15 | 09:45 | Delhi     |  326 |
++-------+-------+-------+-----------+------+
+10 rows in set (0.000 sec)
+
+MariaDB [irctc]> insert into schedule values ('luc', '09:50' ,'10:30', 'Lucknow' , 326);
+Query OK, 1 row affected (0.067 sec)
+
+MariaDB [irctc]> select * from schedule;
++-------+-------+-------+-----------+------+
+| scode | arrt  | tdept | sname     | tno  |
++-------+-------+-------+-----------+------+
+| sdh   | 07:10 | 07:25 | Sealdah   |  325 |
+| hwo   | 07:45 | 08:15 | Howrah    |  325 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  325 |
+| pra   | 09:05 | 09:10 | Prantik   |  325 |
+| del   | 09:15 | 09:45 | Delhi     |  325 |
+| sdh   | 07:10 | 07:25 | Sealdah   |  326 |
+| hwo   | 07:45 | 08:15 | Howrah    |  326 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  326 |
+| pra   | 09:05 | 09:10 | Prantik   |  326 |
+| del   | 09:15 | 09:45 | Delhi     |  326 |
+| luc   | 09:50 | 10:30 | Lucknow   |  326 |
++-------+-------+-------+-----------+------+
+11 rows in set (0.001 sec)
+
+MariaDB [irctc]> insert into schedule values ('che', '07:10' ,'07:25', 'Chennai' , 327);
+Query OK, 1 row affected (0.042 sec)
+
+MariaDB [irctc]> insert into schedule values ('sdh', '07:45' ,'08:10', 'Sealdah' , 327);
+Query OK, 1 row affected (0.051 sec)
+
+MariaDB [irctc]> insert into schedule values ('hwo', '08:30','08:45', 'Howrah' , 327);
+Query OK, 1 row affected (0.061 sec)
+
+MariaDB [irctc]> insert into schedule values ('chh', '09:00','09:45', 'Chhapra' , 327);
+Query OK, 1 row affected (0.067 sec)
+
+MariaDB [irctc]> insert into schedule values ('jay', '08:30','08:45', 'Jaynagar' , 328);
+Query OK, 1 row affected (0.029 sec)
+
+MariaDB [irctc]> insert into schedule values ('sdh', '09:10','10:00', 'Sealdah' , 328);
+Query OK, 1 row affected (0.035 sec)
+
+MariaDB [irctc]> insert into schedule values ('dha', '09:10','10:00', 'Dhanbad' , 329);
+Query OK, 1 row affected (0.038 sec)
+
+MariaDB [irctc]> insert into schedule values ('fir', '10:10','11:00', 'Firozpur' , 329);
+Query OK, 1 row affected (0.026 sec)
+
+MariaDB [irctc]> select * from schedule;
++-------+-------+-------+-----------+------+
+| scode | arrt  | tdept | sname     | tno  |
++-------+-------+-------+-----------+------+
+| sdh   | 07:10 | 07:25 | Sealdah   |  325 |
+| hwo   | 07:45 | 08:15 | Howrah    |  325 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  325 |
+| pra   | 09:05 | 09:10 | Prantik   |  325 |
+| del   | 09:15 | 09:45 | Delhi     |  325 |
+| sdh   | 07:10 | 07:25 | Sealdah   |  326 |
+| hwo   | 07:45 | 08:15 | Howrah    |  326 |
+| kgp   | 08:45 | 09:00 | Kharagpur |  326 |
+| pra   | 09:05 | 09:10 | Prantik   |  326 |
+| del   | 09:15 | 09:45 | Delhi     |  326 |
+| luc   | 09:50 | 10:30 | Lucknow   |  326 |
+| che   | 07:10 | 07:25 | Chennai   |  327 |
+| sdh   | 07:45 | 08:10 | Sealdah   |  327 |
+| hwo   | 08:30 | 08:45 | Howrah    |  327 |
+| chh   | 09:00 | 09:45 | Chhapra   |  327 |
+| jay   | 08:30 | 08:45 | Jaynagar  |  328 |
+| sdh   | 09:10 | 10:00 | Sealdah   |  328 |
+| dha   | 09:10 | 10:00 | Dhanbad   |  329 |
+| fir   | 10:10 | 11:00 | Firozpur  |  329 |
++-------+-------+-------+-----------+------+
+19 rows in set (0.000 sec)
+
+
+MariaDB [irctc]> select tname,tsource,tdest from train where tno in(  select distinct( t.tno) from schedule t,schedule s where t.tno=s.tno and t.sname="sealdah" and s.sname="Delhi");
++------------------+---------+---------+
+| tname            | tsource | tdest   |
++------------------+---------+---------+
+| Rajdhani Express | Sealdah | Delhi   |
+| Lucknow Express  | Sealdah | Lucknow |
++------------------+---------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [irctc]> select tname,tsource,tdest from train where tno in(  select distinct( t.tno) from schedule t,schedule s where t.tno=s.tno and t.sname="sealdah" and s.sname="Howrah");
++----------------------+-----------------+------------------+
+| tname                | tsource         | tdest            |
++----------------------+-----------------+------------------+
+| Rajdhani Express     | Sealdah         | Delhi            |
+| Lucknow Express      | Sealdah         | Lucknow          |
+| Ganga Kaveri Express | Chennai Central | Chhapra Junction |
++----------------------+-----------------+------------------+
+3 rows in set (0.001 sec)
+
